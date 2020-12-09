@@ -1,6 +1,9 @@
 .App {
 	text-align: center;
 }
+body {
+	max-width: 100%;
+}
 
 .App-logo {
 	height: 40vmin;
@@ -14,8 +17,9 @@
 }
 
 .App-header {
+	width: 100%;
 	background-color: #282c34;
-	min-height: 20vh;
+	min-height: 15vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

@@ -22,7 +22,7 @@ export function getPassage(bibleCv) {
 
         let text = "";
         text = selectedVerses.map((selectedVerse) => {
-            return `${selectedVerse}. ${currentChapter.verses.find((vers) => Number(vers.verse) === selectedVerse).text}\n`;
+            return `${selectedVerse}. ${currentChapter.verses.find((vers) => Number(vers.verse) === selectedVerse).text}<br/>`;
         });
         text = text.join("");
         return text;

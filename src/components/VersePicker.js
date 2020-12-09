@@ -15,17 +15,18 @@ function VersePicker() {
     const [errors, seterrors] = useState([]);
 
     useEffect(() => {
-        const cv = chapterAndVerse(book)
-        if (cv.success) setbibleCv(cv);
+        let cv = chapterAndVerse(book)
         const chapterLength = cv.book.chapters;
         setchapterList([...Array(chapterLength + 1).keys()].slice(1));
+        cv = chapterAndVerse(`${book} 1:1-${cv.book.versesPerChapter[0]}`);
+        if (cv.success) setbibleCv(cv);
+        setcontent(getPassage(cv));
     }, [book]);
 
 
     useEffect(() => {
         if (errors.length === 0) {
-            const text = getPassage(bibleCv)
-            setcontent(text);
+            setcontent(getPassage(bibleCv));
         }
     }, [bibleCv, errors]);
 
@@ -41,31 +42,34 @@ function VersePicker() {
     return (
         <div>
             <div className="flex">
-                <div>
+                <span>
                     <label>Book</label>
                     <select value={book} onChange={(event) => setbook(event.target.value)} placeholder="Book">
                         <option></option>
                         {books.map((book, i) => (<option key={i} value={book}>{book}</option>))}
                     </select>
-                </div>
+                </span>
 
-                <div>
+                <span>
                     <label>Chapter</label>
                     <select value={chapter} placeholder="chapter" onChange={(event) => setchapter(event.target.value)}>
                         <option></option>
                         {chapterList.map((chapter, i) => (<option key={i} value={chapter}>{chapter}</option>))}
                     </select>
-                </div>
+                </span>
 
-                <div>
+                <span>
                     <label>Verses (eg: 1-5)</label>
                     <input type="text" value={verse} placeholder="Verse" onInput={(event) => handleVerseChange(event.target.value)} />
                     <br /><small>{errors.map((e, i) => (<p key={i} >{e}</p>))}</small>
-                </div>
+                </span>
 
             </div>
 
-            <div style={{ whiteSpace: 'pre' }}>{content}</div>
+            <div
+                style={{ textAlign: 'justify', margin: '0 auto 0 auto', width: '80vw' }}
+                dangerouslySetInnerHTML={{ __html: content }}
+            />
 
         </div>
     );
@@ -74,6 +78,7 @@ function VersePicker() {
 export default VersePicker;
 
 /*
+sample Chapter and verse output:
 {
   "book": {
     "id": "Dan",
