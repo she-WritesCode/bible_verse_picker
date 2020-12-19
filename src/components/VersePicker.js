@@ -18,7 +18,11 @@ function VersePicker() {
         let cv = chapterAndVerse(book)
         const chapterLength = cv.book.chapters;
         setchapterList([...Array(chapterLength + 1).keys()].slice(1));
-        cv = chapterAndVerse(`${book} 1:1-${cv.book.versesPerChapter[0]}`);
+        const defaultVerse = `1-${cv.book.versesPerChapter[0]}`;
+        const defaultChapter = 1;
+        setverse(defaultVerse);
+        setchapter(defaultChapter);
+        cv = chapterAndVerse(`${book} ${defaultChapter}:${defaultVerse}`);
         if (cv.success) setbibleCv(cv);
         setcontent(getPassage(cv));
     }, [book]);
@@ -30,12 +34,19 @@ function VersePicker() {
         }
     }, [bibleCv, errors]);
 
-    function handleVerseChange(value) {
+    function handleChapterChange(newChapter) {
+        const cv = chapterAndVerse(`${book} ${newChapter}`);
+        setbibleCv(cv.success ? cv : bibleCv);
+        setverse(`1-${cv.book.versesPerChapter[newChapter - 1]}`);
+        setchapter(newChapter);
+    }
+
+    function handleVerseChange(newVerse) {
         // TODO: valid: 1,2,3 // DONE: valid: 1-5 // TODO(Probaly): valid: 1-5, 23 // regex: [0-9],?[0-9]*| [0-9]-[0-9]
-        const cv = chapterAndVerse(`${book} ${chapter}${value ? ':' + value : ''}`);
+        const cv = chapterAndVerse(`${book} ${chapter}${newVerse ? ':' + newVerse : ''}`);
         setbibleCv(cv.success ? cv : bibleCv);
         seterrors(cv.success ? [] : [`invalid verse due to ${cv.reason}`]);
-        setverse(value);
+        setverse(newVerse);
     }
 
 
@@ -52,9 +63,9 @@ function VersePicker() {
 
                 <span>
                     <label>Chapter</label>
-                    <select value={chapter} placeholder="chapter" onChange={(event) => setchapter(event.target.value)}>
+                    <select value={chapter} placeholder="chapter" onChange={(event) => handleChapterChange(event.target.value)}>
                         <option></option>
-                        {chapterList.map((chapter, i) => (<option key={i} value={chapter}>{chapter}</option>))}
+                        {chapterList.map((chapt, i) => (<option key={i} value={chapt}>{chapt}</option>))}
                     </select>
                 </span>
 

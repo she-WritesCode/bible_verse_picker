@@ -1,4 +1,4 @@
-import VersePicker from './components/VersePicker';
+import BibleVersePicker from './components/BibleVersePicker';
 import './App.css';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
           Bible verse picker
         </p>
       </header>
-      <VersePicker />
+      <BibleVersePicker />
     </div>
   );
 }

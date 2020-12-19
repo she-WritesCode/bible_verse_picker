@@ -40,3 +40,49 @@ body {
 		transform: rotate(360deg);
 	}
 }
+.autocomplete {
+	position: relative;
+}
+.autocomplete label {
+	display: block;
+	margin-bottom: 5px;
+	font-size: 14px;
+	font-weight: 100;
+}
+/* .autocomplete-input {
+  padding: 7px 10px;
+  width: 93%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+} */
+.autocomplete-input:focus {
+	border-color: #000;
+}
+.autocomplete-list {
+	position: absolute;
+	z-index: 10;
+	overflow: auto;
+	min-width: 200px;
+	max-height: 200px;
+	margin: 0;
+	margin-top: 5px;
+	padding: 0;
+	border: 1px solid #333;
+	list-style: none;
+	border-radius: 1px;
+	background-color: #111;
+	box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+}
+.autocomplete-list li {
+	margin: 0;
+	padding: 6px 10px;
+	border-bottom: 1px solid #2c2c2c;
+}
+.autocomplete-list li:last-child {
+	border-bottom: 0;
+}
+.autocomplete-list li:hover,
+.autocomplete-list li.active {
+	background-color: #3c3c3c;
+}
