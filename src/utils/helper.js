@@ -9,7 +9,7 @@ export function range(min, max) {
 
 export function getPassage(bibleCv) {
     if (bibleCv.success) {
-        const bible = require(`../bible-kjv/${bibleCv.book.name.replace(" ", "")}.json`)
+        const bible = require(`../bible-kjv/${bibleCv.book.name.replace(/\s/g, "")}.json`)
         const currentChapter = bible.chapters.find((chap) => Number(chap.chapter) === bibleCv.chapter);
         if (currentChapter) {
             let selectedVerses = [];
