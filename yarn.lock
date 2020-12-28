@@ -8895,6 +8895,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-autocomplete-hint@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-autocomplete-hint/-/react-autocomplete-hint-1.2.0.tgz#ec31a54a0f83bff93d8014803255973b4c47061c"
+  integrity sha512-DFHNoJ5tAw3tZAXTafsoBm6EE/59hNF9lY8DTWWEL0rnesja+RbZ/TdDjv5rGoz2ahy+6dSlXHx+56V6G07oig==
+
 react-dev-utils@^11.0.1:
   version "11.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.1.tgz#30106c2055acfd6b047d2dc478a85c356e66fe45"
